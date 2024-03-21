@@ -147,7 +147,7 @@ fun Screen2(onBackPressed: () -> Unit) {
             verticalArrangement = Arrangement.Center
         ) {
             AnimatedVisibility(visible = visible) {
-                Text("Value Based Animation", fontSize = 20.sp)
+                Text("Animation taking values", fontSize = 20.sp)
             }
             Spacer(modifier = Modifier.height(16.dp))
             Button(onClick = { visible = !visible }) {
