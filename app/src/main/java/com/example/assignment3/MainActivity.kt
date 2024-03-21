@@ -106,10 +106,10 @@ fun MainScreen(onNavigate: (Int) -> Unit) {
 fun Screen1(onBackPressed: () -> Unit) {
     val infiniteTransition = rememberInfiniteTransition(label = "")
     val color by infiniteTransition.animateColor(
-        initialValue = Color.Red,
-        targetValue = Color.Blue,
+        initialValue = Color.Black,
+        targetValue = Color.Green,
         animationSpec = infiniteRepeatable(
-            animation = tween(2000),
+            animation = tween(3000),
             repeatMode = RepeatMode.Reverse
         ), label = ""
     )
@@ -127,16 +127,9 @@ fun Screen1(onBackPressed: () -> Unit) {
             modifier = Modifier
                 .fillMaxSize()
                 .background(color)
-        ) {
-            Text(
-                text = "Color changes in each 2 second",
-                fontSize = 20.sp,
-                color = Color.White,
-                modifier = Modifier.align(Alignment.Center)
-            )
+        )
         }
 
-    }
 }
 
 @ExperimentalAnimationApi
@@ -193,12 +186,10 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         }
 
         AnimatedContent(targetState = count, label = "") { targetCount ->
-            // Make sure to use `targetCount`, not `count`.
             Text(text = "Count: $targetCount")
         }
 
         AnimatedContent(targetState = count, label = "") { targetCount ->
-            // Make sure to use `targetCount`, not `count`.
             Text(text = "Count: $targetCount")
         }
 
@@ -209,20 +200,13 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         AnimatedContent(
             targetState = count,
             transitionSpec = {
-                // Compare the incoming number with the previous number.
                 if (targetState > initialState) {
-                    // If the target number is larger, it slides up and fades in
-                    // while the initial (smaller) number slides up and fades out.
                     slideInVertically { height -> height } + fadeIn() with
                             slideOutVertically { height -> -height } + fadeOut()
                 } else {
-                    // If the target number is smaller, it slides down and fades in
-                    // while the initial number slides down and fades out.
                     slideInVertically { height -> -height } + fadeIn() with
                             slideOutVertically { height -> height } + fadeOut()
                 }.using(
-                    // Disable clipping since the faded slide-in/out should
-                    // be displayed out of bounds.
                     SizeTransform(clip = false)
                 )
             }, label = ""
@@ -277,7 +261,7 @@ fun MyApp() {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Jetpack Compose Animation Demo") },
+                title = { Text("Playing with animations") },
                 navigationIcon = {
                     if (currentScreen != 0) {
                         IconButton(onClick = { currentScreen = 0 }) {
