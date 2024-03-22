@@ -30,6 +30,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -141,17 +142,16 @@ fun Screen2(onBackPressed: () -> Unit) {
         IconButton(onClick = onBackPressed) {
             Icon(Icons.Default.ArrowBack, contentDescription = "Back")
         }
-        Column(
+        Spacer(modifier = Modifier.padding(40.dp))
+        Row(
             modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
         ) {
             AnimatedVisibility(visible = visible) {
-                Text("Animation taking values", fontSize = 20.sp)
+                Text("I am displayed", fontSize = 20.sp)
             }
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.width(16.dp))
             Button(onClick = { visible = !visible }) {
-                Text(if (visible) "Hide Text" else "Show Text")
+                Text(if (visible) "Hide Value" else "Show Value")
             }
         }
     }
@@ -178,15 +178,11 @@ fun Screen3(onBackPressed: () -> Unit) {
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Row {
+    Column {
         var count by remember { mutableStateOf(0) }
         var score by remember { mutableStateOf(0) }
         Button(onClick = { count++; score += 100 }) {
-            Text("Add")
-        }
-
-        AnimatedContent(targetState = count, label = "") { targetCount ->
-            Text(text = "Count: $targetCount")
+            Text("Increase Count")
         }
 
         AnimatedContent(targetState = count, label = "") { targetCount ->
@@ -211,7 +207,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                 )
             }, label = ""
         ) { targetCount ->
-            Text(text = "$targetCount")
+            Text(text = "$targetCount ")
         }
     }
 }
@@ -233,14 +229,7 @@ fun Screen4(onBackPressed: () -> Unit) {
                 .clip(RoundedCornerShape(8.dp))
                 .background(Color.Green)
                 .clickable { },
-        ) {
-            Text(
-                text = "Gesture Based Animation",
-                fontSize = 20.sp,
-                color = Color.White,
-                modifier = Modifier.align(Alignment.Center)
-            )
-        }
+        )
 
     }
 }
